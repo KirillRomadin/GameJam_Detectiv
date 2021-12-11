@@ -842,6 +842,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1765279821}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &224941307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7476422166544629467, guid: 740c99ff7ec3e3141a08fa28b2fe8ec6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3364342300550943742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &224941314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224941307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef7605d536a4ee4f86706a015785287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frameRate: 10
+  _loop: 1
+  _sprites:
+  - {fileID: 21300000, guid: 48006bfd7d1bd1048a1743d530be454b, type: 3}
+  - {fileID: 21300000, guid: bb8a864b75c344c479da68c601829988, type: 3}
+  - {fileID: 21300000, guid: ce1015f25ccbb88499f1e0d6fb302495, type: 3}
+  - {fileID: 21300000, guid: 11be6d05280e2234c9cee0e4b5b3f5d5, type: 3}
+  _onComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &262485126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5175067631815857446, guid: 154a7a83fac6a37478f8add56dff5b75,
@@ -1711,7 +1739,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.6
-  m_Range: 80
+  m_Range: 60
   m_SpotAngle: 153
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
