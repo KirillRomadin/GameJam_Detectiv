@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace PixelCrew
+namespace Detectiv
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class AnimationComponent : MonoBehaviour
