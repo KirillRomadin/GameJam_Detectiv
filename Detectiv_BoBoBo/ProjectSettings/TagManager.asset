@@ -15,6 +15,7 @@ TagManager:
   - Bandage
   - Boots
   - Hero
+  - Dezist
   layers:
   - Default
   - TransparentFX
