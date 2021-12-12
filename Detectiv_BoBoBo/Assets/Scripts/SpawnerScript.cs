@@ -15,6 +15,60 @@ namespace Detectiv
         private bool _flag = true;
         private bool _killerFlag = true;
         SpriteRenderer[] spriteRenderers;
+
+        private bool[] clues;
+
+        
+        private int[] randomIntArray() //length 8
+        {
+            List<int> ints = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
+            int[] result = new int[8];
+            for (int maxRange = 7; maxRange >= 0; maxRange--)
+            {
+                int randomPosition = Random.Range(0, maxRange);
+                result[7 - maxRange] = ints[randomPosition];
+                ints.RemoveAt(randomPosition);
+            }
+            return result;
+        }
+
+        private bool[] cluesOnSuspect(int suspectNumber, int[] randomSeed) // bool [8] with clues on person with number suspectNumber 
+            //suspect 0 is the killer      radnomSeed length = 8;
+        {
+            bool[] result = new bool[8];
+            result[3] = suspectNumber % 2 == 1;
+            result[2] = suspectNumber / 2 % 2 == 1;
+            result[1] = suspectNumber / 4 % 2 == 1;
+            result[0] = suspectNumber / 8 % 2 == 1;
+            int clueCount = 0;
+            for(int i = 0; i<4; i++)
+            {
+                if (result[i])
+                {
+                    clueCount++;
+                }
+            }
+
+            List<int> extraCLues = new List<int>() { 4, 5, 6, 7 };
+            int maxRange = 3;
+            for (; clueCount<4; clueCount++)
+            {
+                int randomClue = Random.Range(0, maxRange);
+                result[extraCLues[randomClue]] = true;
+                extraCLues.RemoveAt(randomClue);
+                maxRange--;
+            }
+
+            bool[] shuffledResult = new bool[8];
+            for(int i = 0; i<8; i++)
+            {
+                shuffledResult[randomSeed[i]] = result[i];
+            }
+            return shuffledResult;
+        }
+
+        
+
         int i;
 
         private void Start()
@@ -22,6 +76,29 @@ namespace Detectiv
             _numberListSecondIteration = new List<int>();
             _numberListFirstIteration = new List<int>();
             i = 0;
+
+
+
+
+          /*  int [] zero = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+            int[] shuffled = randomIntArray();
+            foreach (int i in shuffled)
+            {
+                Debug.Log(i);
+            }
+
+
+            bool [] murderFlags = cluesOnSuspect(0, shuffled);
+            foreach (bool b in murderFlags)
+            {
+                Debug.Log(b);
+            }
+            bool[] suspectFlags = cluesOnSuspect(6, shuffled);
+            foreach (bool b in suspectFlags)
+            {
+                Debug.Log(b);
+            }*/
+        }
 
             while (i < 16)
             {
