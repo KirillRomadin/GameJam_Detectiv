@@ -283,23 +283,23 @@ public class Rout : MonoBehaviour
                 endMarker.position = tree.Move();
                 distance = Vector3.Distance(startMarker.position, endMarker.position);
                 startTime = Time.time;
-                flag = false;
+                //flag = false;
             }
     }
 
-    public bool flag = false;
+    //public bool flag = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        for(int i =0; i < points.Count; ++i)
-        {
-            if (points[i].GetComponent<Collider2D>() == collision)
-            {
-                flag = true;
-                Debug.Log("Trigger");
-            }
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    for(int i =0; i < points.Count; ++i)
+    //    {
+    //        if (points[i].GetComponent<Collider2D>() == collision)
+    //        {
+    //            flag = true;
+    //            Debug.Log("Trigger");
+    //        }
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
