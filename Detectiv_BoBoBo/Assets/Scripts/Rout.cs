@@ -88,11 +88,35 @@ public class Rout : MonoBehaviour
 
         public void create_map()
         {
+            TreeNode fL = this.add(new Point(points[2].position, Status.INTERSPACE), _head, false); //правильно
+            TreeNode fR = this.add(new Point(points[1].position, Status.INTERSPACE), _head, true);  //правильно
 
-            TreeNode fL = this.add(new Point(points[1].position, Status.ROOM), _head, false);
+            TreeNode fLsL = this.add(new Point(points[12].position, Status.INTERSPACE), fL, false); //правильно
+            TreeNode fLsR = this.add(new Point(points[4].position, Status.ROOM), fL, true);         //правильно
 
-            TreeNode fR = this.add(new Point(points[2].position, Status.ROOM), _head, true);
-            //TreeNode fLsR = this.add(new Point(points[2].position, Status.NOTHING), fL, true);
+            TreeNode fLsRthL = this.add(new Point(points[3].position, Status.ROOM), fLsR, false);   //правильно
+            TreeNode fLsRthR = this.add(null, fLsR, true);                                          //правильно
+
+            TreeNode fLsLthR = this.add(new Point(points[13].position, Status.ROOM), fLsL, false);  //
+            TreeNode fLsLthRL = this.add(new Point(points[14].position, Status.ROOM), fLsL, true);  //
+
+            TreeNode fRsL = this.add(null, fR, false);  //
+            TreeNode fRsR = this.add(new Point(points[5].position, Status.ROOM), fR, true); //
+
+            TreeNode fRsRthR = this.add(new Point(points[6].position, Status.INTERSPACE), fRsR, true);
+            TreeNode fRsRthL = this.add(null, fRsR, false);
+
+            TreeNode fRsRthRfR = this.add(new Point(points[7].position, Status.INTERSPACE), fRsRthR, true);
+            TreeNode fRsRthRfL = this.add(null, fRsRthR, false);
+
+            TreeNode fRsRthRfRfR = this.add(new Point(points[8].position, Status.INTERSPACE), fRsRthRfR, true);
+            TreeNode fRsRthRfRfL = this.add(null, fRsRthRfR, false);
+            TreeNode fRsRthRfRfRsR = this.add(new Point(points[9].position, Status.INTERSPACE), fRsRthRfRfR, true);
+            TreeNode fRsRthRfRfRsL = this.add(null, fRsRthRfRfR, false);
+
+            TreeNode fRsRthRfRfRsRsL = this.add(new Point(points[10].position, Status.ROOM), fRsRthRfRfRsR, false);
+            TreeNode fRsRthRfRfRsRsR = this.add(new Point(points[11].position, Status.ROOM), fRsRthRfRfRsR, true);
+
         }
 
         public TreeNode get()
@@ -178,7 +202,7 @@ public class Rout : MonoBehaviour
 
                     if (RandomNumbers.NextNumber() % 2 == 0)
                     {
-                        if (way.left != null)
+                        if (way.left.value != null)
                         {
                             way = way.left;
                             return way.value.coord;
@@ -186,7 +210,7 @@ public class Rout : MonoBehaviour
                     }
                     else
                     {
-                        if (way.right != null)
+                        if (way.right.value != null)
                         {
                             way = way.right;
                             return way.value.coord;
@@ -230,25 +254,56 @@ public class Rout : MonoBehaviour
 
     }
 
-    public float speed = 0.0004f;
+    public float speed = 4.0f;
+    private float startTime;
+    private float distance;
+    public Transform startMarker;
+    public Transform endMarker;
 
     // Start is called before the first frame update
     void Start()
     {
         tree = new Tree(points);
+        startTime = Time.time;
+        startMarker = points[0];
+        endMarker = points[15];
+        endMarker.position = tree.Move();
+        distance = Vector3.Distance(startMarker.position, endMarker.position);
     }
+
+    void journeyoPoint()
+    { 
+        float distCovered = (Time.time - startTime) * speed;
+        float fractOfDist = distCovered / distance;
+        transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fractOfDist);
+        
+        if (Vector3.Distance(transform.position,endMarker.position)<0.01f)
+            {
+                startMarker.position = endMarker.position;
+                endMarker.position = tree.Move();
+                distance = Vector3.Distance(startMarker.position, endMarker.position);
+                startTime = Time.time;
+                //flag = false;
+            }
+    }
+
+    //public bool flag = false;
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    for(int i =0; i < points.Count; ++i)
+    //    {
+    //        if (points[i].GetComponent<Collider2D>() == collision)
+    //        {
+    //            flag = true;
+    //            Debug.Log("Trigger");
+    //        }
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    void FixedUpdate()
-    {
-        //Vector3 vec = tree.Move() - transform.position;
-        //double speed = System.Math.Sqrt(vec.x*vec.x+vec.y*vec.y);
-        //transform.position = Vector3.Lerp(transform.position, tree.Move(),10.0f);
-        transform.position = Vector3.MoveTowards(transform.position, tree.Move(), speed);
+        journeyoPoint();
     }
 }

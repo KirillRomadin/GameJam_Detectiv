@@ -33,8 +33,19 @@ namespace Detectiv
             var xVelocity = +_direction.x * _speed;
             var yVelocity = +_direction.y * _speed;
             _rigibody.velocity = new Vector2(xVelocity, yVelocity);
+            UpdateSpriteDirection();
+        }
 
-
+        private void UpdateSpriteDirection()
+        {
+            if (_direction.x > 0)
+            {
+                _sprite.flipX = true;
+            }
+            else if (_direction.x < 0)
+            {
+                _sprite.flipX = false;
+            }
         }
     }
 }

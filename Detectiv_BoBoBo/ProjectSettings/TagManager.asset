@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NPC
+  - Killer
+  - Hat
+  - Pipe
+  - Glasses
+  - Moustache
+  - Bowtie
+  - Dress
+  - Bandage
+  - Boots
+  - Hero
   layers:
   - Default
   - TransparentFX
@@ -11,7 +22,7 @@ TagManager:
   - Hero
   - Water
   - UI
-  - 
+  - Clothes
   - 
   - 
   - 
@@ -40,4 +51,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Person
+    uniqueID: 1410048061
+    locked: 0
+  - name: Clothes
+    uniqueID: 1361913363
     locked: 0
