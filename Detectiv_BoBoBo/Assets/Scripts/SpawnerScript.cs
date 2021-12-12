@@ -73,7 +73,7 @@ namespace Detectiv
 
         int i;
 
-        private void Start()
+        private void Awake()
         {
             _numberListSecondIteration = new List<int>();
             _numberListFirstIteration = new List<int>();
@@ -117,7 +117,7 @@ namespace Detectiv
                         inst_obj.gameObject.tag = "Killer";
                         _killerFlag = false;
 
-                        for(int i = 0; i < 4; i++)
+                        for (int i = 0; i < 4; i++)
                         {
                             CorrectClues.Add(spriteRenderers[arrayStrange[i]]);
                         }
@@ -133,7 +133,7 @@ namespace Detectiv
 
                 for (int j = 1; j < spriteRenderers.Length; j++)
                 {
-                    if (!arratBool[j-1])
+                    if (!arratBool[j - 1])
                     {
                         Destroy(spriteRenderers[j].gameObject);
                     }
@@ -141,6 +141,11 @@ namespace Detectiv
 
                 i++;
             }
+        }
+
+        private void Start()
+        {
+            
         }
 
     //        while (i < 16)

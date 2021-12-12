@@ -6,6 +6,15 @@ namespace Detectiv
 {
     public class Kill : MonoBehaviour
     {
+        [SerializeField] GameObject bandage;
+        [SerializeField] GameObject beard;
+        [SerializeField] GameObject boots;
+        [SerializeField] GameObject bow;
+        [SerializeField] GameObject dress;
+        [SerializeField] GameObject glasses;
+        [SerializeField] GameObject hat;
+        [SerializeField] GameObject tube;
+
         [SerializeField] private GameObject _hero;
         [SerializeField] private Sprite _sprite;
         [SerializeField] private SpawnerScript _spawn;
@@ -72,7 +81,48 @@ namespace Detectiv
                                     
                                     for(int a = 1; a < spriteRenderers.Length; a++)
                                     {
-                                        Destroy(spriteRenderers[a]);
+                                        Destroy(spriteRenderers[a].gameObject);
+                                        if (spriteRenderers[a].gameObject.tag == "Hat")
+                                        {
+                                            var inst_obj = Instantiate(hat, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if(spriteRenderers[a].gameObject.tag == "Pipe")
+                                        {
+                                            var inst_obj = Instantiate(tube, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if(spriteRenderers[a].gameObject.tag == "Glasses")
+                                        {
+                                            var inst_obj = Instantiate(glasses, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if (spriteRenderers[a].gameObject.tag == "Moustache")
+                                        {
+                                            var inst_obj = Instantiate(beard, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if (spriteRenderers[a].gameObject.tag == "Bowtie")
+                                        {
+                                            var inst_obj = Instantiate(bow, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if(spriteRenderers[a].gameObject.tag == "Dress")
+                                        {
+                                            var inst_obj = Instantiate(dress, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if(spriteRenderers[a].gameObject.tag == "Bandage")
+                                        {
+                                            var inst_obj = Instantiate(bandage, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        else if(spriteRenderers[a].gameObject.tag == "Boots")
+                                        {
+                                            var inst_obj = Instantiate(boots, new Vector3(spriteRenderers[a].gameObject.transform.position.x, spriteRenderers[a].gameObject.transform.position.y, spriteRenderers[a].gameObject.transform.position.z), Quaternion.identity)
+                                                as GameObject;
+                                        }
+                                        
                                     }
 
                                     break;
