@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NPC
+  - Killer
+  - Hat
+  - Pipe
+  - Glasses
+  - Moustache
+  - Bowtie
+  - Dress
+  - Bandage
+  - Boots
+  - Hero
   layers:
   - Default
   - TransparentFX

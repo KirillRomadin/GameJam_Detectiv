@@ -5660,6 +5660,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7476422166544629467, guid: 740c99ff7ec3e3141a08fa28b2fe8ec6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hero
+      objectReference: {fileID: 0}
     - target: {fileID: 8490886862823319447, guid: 740c99ff7ec3e3141a08fa28b2fe8ec6,
         type: 3}
       propertyPath: m_Size.x

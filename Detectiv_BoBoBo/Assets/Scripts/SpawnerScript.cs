@@ -12,7 +12,8 @@ namespace Detectiv
         private List<int> _numberListSecondIteration;
         private List<int> _numberListFirstIteration;
         private int _count;
-        private bool flag = true;
+        private bool _flag = true;
+        private bool _killerFlag = true;
         SpriteRenderer[] spriteRenderers;
         int i;
 
@@ -28,16 +29,22 @@ namespace Detectiv
             while (i < 16)
             {
                 int randfirst = Random.Range(0, _vectors.Count);
-                if (flag)
+                if (_flag)
                 {
                     inst_obj = Instantiate(_npc, _vectors[randfirst], Quaternion.identity) as GameObject;
+
+                    if (_killerFlag)
+                    {
+                        inst_obj.gameObject.tag = "Killer";
+                        _killerFlag = false;
+                    }
 
                     _vectors.RemoveAt(randfirst);
 
                     spriteRenderers = inst_obj.GetComponentsInChildren<SpriteRenderer>();
                 }
 
-                flag = false;
+                _flag = false;
 
                 int j = 0;
                 _count = 0;
@@ -101,12 +108,12 @@ namespace Detectiv
                     for(int g = 0; g < _numberListFirstIteration.Count; g++)
                     {
                         int f = _numberListFirstIteration[g];
-                        spriteRenderers[f].gameObject.SetActive(false);
+                        Destroy(spriteRenderers[f].gameObject);
                     }
 
                     _numberListSecondIteration.Add(_count);
                     i++;
-                    flag = true;
+                    _flag = true;
                 }
 
                 _numberListFirstIteration.Clear();
