@@ -22,10 +22,7 @@ namespace Detectiv
             _numberListSecondIteration = new List<int>();
             _numberListFirstIteration = new List<int>();
             i = 0;
-        }
 
-        private void Update()
-        {
             while (i < 16)
             {
                 int randfirst = Random.Range(0, _vectors.Count);
@@ -52,7 +49,7 @@ namespace Detectiv
                 {
                     int rand = Random.Range(1, 9);
 
-                    if(rand == 1 && !(_numberListFirstIteration.Contains(rand)))
+                    if (rand == 1 && !(_numberListFirstIteration.Contains(rand)))
                     {
                         _numberListFirstIteration.Add(rand);
                         _count += 437;
@@ -105,7 +102,7 @@ namespace Detectiv
 
                 if (!_numberListSecondIteration.Contains(_count))
                 {
-                    for(int g = 0; g < _numberListFirstIteration.Count; g++)
+                    for (int g = 0; g < _numberListFirstIteration.Count; g++)
                     {
                         int f = _numberListFirstIteration[g];
                         Destroy(spriteRenderers[f].gameObject);
@@ -118,6 +115,11 @@ namespace Detectiv
 
                 _numberListFirstIteration.Clear();
             }
+        }
+
+        private void Update()
+        {
+            
             
         }
 
