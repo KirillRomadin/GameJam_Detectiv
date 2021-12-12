@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Detectiv
 {
-    public class KillerSc : MonoBehaviour
+    public class Kill : MonoBehaviour
     {
         [SerializeField] private GameObject _hero;
         [SerializeField] private Sprite _sprite;
@@ -15,7 +15,7 @@ namespace Detectiv
         private GameObject _foundKiller;
 
         private bool _find = true;
-        private bool _getClothes = true; 
+        private bool _getClothes = true;
 
         private float _time;
 
@@ -48,7 +48,7 @@ namespace Detectiv
             }
 
 
-            if(_time > 15)
+            if (_time > 15)
             {
                 for (int i = 0; i < _foundNPC.Length; i++)
                 {
@@ -62,13 +62,18 @@ namespace Detectiv
                         {
                             for (int y = 0; y < _rendererList.Count; y++)
                             {
-                                if (spriteRenderers[j].gameObject.tag == _rendererList[y].tag && _time > 15)
+                                if (spriteRenderers[j].gameObject.tag == "NPC" && _time > 15)
                                 {
                                     Debug.Log("Hay");
                                     var sp = _foundNPC[i].GetComponent<SpriteRenderer>();
                                     sp.sprite = _sprite;
                                     _time = 0;
                                     _foundNPC[i].gameObject.tag = "Dezist";
+                                    
+                                    for(int a = 1; a < spriteRenderers.Length; a++)
+                                    {
+                                        Destroy(spriteRenderers[a]);
+                                    }
 
                                     break;
                                 }

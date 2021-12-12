@@ -16,9 +16,11 @@ namespace Detectiv
         private bool _killerFlag = true;
         SpriteRenderer[] spriteRenderers;
 
+        public List<SpriteRenderer> CorrectClues;
+
         private bool[] clues;
 
-        
+
         private int[] randomIntArray() //length 8
         {
             List<int> ints = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
@@ -33,7 +35,7 @@ namespace Detectiv
         }
 
         private bool[] cluesOnSuspect(int suspectNumber, int[] randomSeed) // bool [8] with clues on person with number suspectNumber 
-            //suspect 0 is the killer      radnomSeed length = 8;
+                                                                           //suspect 0 is the killer      radnomSeed length = 8;
         {
             bool[] result = new bool[8];
             result[3] = suspectNumber % 2 == 1;
@@ -41,7 +43,7 @@ namespace Detectiv
             result[1] = suspectNumber / 4 % 2 == 1;
             result[0] = suspectNumber / 8 % 2 == 1;
             int clueCount = 0;
-            for(int i = 0; i<4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 if (result[i])
                 {
@@ -51,7 +53,7 @@ namespace Detectiv
 
             List<int> extraCLues = new List<int>() { 4, 5, 6, 7 };
             int maxRange = 3;
-            for (; clueCount<4; clueCount++)
+            for (; clueCount < 4; clueCount++)
             {
                 int randomClue = Random.Range(0, maxRange);
                 result[extraCLues[randomClue]] = true;
@@ -60,14 +62,14 @@ namespace Detectiv
             }
 
             bool[] shuffledResult = new bool[8];
-            for(int i = 0; i<8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 shuffledResult[randomSeed[i]] = result[i];
             }
             return shuffledResult;
         }
 
-        
+
 
         int i;
 
@@ -80,25 +82,25 @@ namespace Detectiv
 
 
 
-          /*  int [] zero = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
-            int[] shuffled = randomIntArray();
-            foreach (int i in shuffled)
-            {
-                Debug.Log(i);
-            }
+            /*  int [] zero = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+              int[] shuffled = randomIntArray();
+              foreach (int i in shuffled)
+              {
+                  Debug.Log(i);
+              }
 
 
-            bool [] murderFlags = cluesOnSuspect(0, shuffled);
-            foreach (bool b in murderFlags)
-            {
-                Debug.Log(b);
-            }
-            bool[] suspectFlags = cluesOnSuspect(6, shuffled);
-            foreach (bool b in suspectFlags)
-            {
-                Debug.Log(b);
-            }*/
-        }
+              bool [] murderFlags = cluesOnSuspect(0, shuffled);
+              foreach (bool b in murderFlags)
+              {
+                  Debug.Log(b);
+              }
+              bool[] suspectFlags = cluesOnSuspect(6, shuffled);
+              foreach (bool b in suspectFlags)
+              {
+                  Debug.Log(b);
+              }*/
+            int[] arrayStrange = randomIntArray();
 
             while (i < 16)
             {
@@ -106,111 +108,139 @@ namespace Detectiv
                 if (_flag)
                 {
                     inst_obj = Instantiate(_npc, _vectors[randfirst], Quaternion.identity) as GameObject;
+                    _vectors.RemoveAt(randfirst);
+
+                    spriteRenderers = inst_obj.GetComponentsInChildren<SpriteRenderer>();
 
                     if (_killerFlag)
                     {
                         inst_obj.gameObject.tag = "Killer";
                         _killerFlag = false;
+
+                        for(int i = 0; i < 4; i++)
+                        {
+                            CorrectClues.Add(spriteRenderers[arrayStrange[i]]);
+                        }
+
                     }
-
-                    _vectors.RemoveAt(randfirst);
-
-                    spriteRenderers = inst_obj.GetComponentsInChildren<SpriteRenderer>();
                 }
 
-                _flag = false;
 
-                int j = 0;
-                _count = 0;
-                while (j < 4)
+                bool[] arratBool = cluesOnSuspect(i, arrayStrange);
+
+                Debug.Log(spriteRenderers.Length);
+
+
+                for (int j = 1; j < spriteRenderers.Length; j++)
                 {
-                    int rand = Random.Range(1, 9);
-
-                    if (rand == 1 && !(_numberListFirstIteration.Contains(rand)))
+                    if (!arratBool[j-1])
                     {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 437;
-                        j++;
-
-                    }
-                    else if (rand == 2 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 566;
-                        j++;
-                    }
-                    else if (rand == 3 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 110;
-                        j++;
-                    }
-                    else if (rand == 4 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 444;
-                        j++;
-                    }
-                    else if (rand == 5 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 228;
-                        j++;
-                    }
-                    else if (rand == 6 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 789;
-                        j++;
-                    }
-                    else if (rand == 7 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 653;
-                        j++;
-                    }
-                    else if (rand == 8 && !(_numberListFirstIteration.Contains(rand)))
-                    {
-                        _numberListFirstIteration.Add(rand);
-                        _count += 975;
-                        j++;
+                        Destroy(spriteRenderers[j].gameObject);
                     }
                 }
 
-                if (!_numberListSecondIteration.Contains(_count))
-                {
-                    for (int g = 0; g < _numberListFirstIteration.Count; g++)
-                    {
-                        int f = _numberListFirstIteration[g];
-                        Destroy(spriteRenderers[f].gameObject);
-                    }
-
-                    _numberListSecondIteration.Add(_count);
-                    i++;
-                    _flag = true;
-                }
-
-                _numberListFirstIteration.Clear();
+                i++;
             }
         }
 
-        private void Update()
-        {
-            
-            
-        }
+    //        while (i < 16)
+    //        {
+    //            int randfirst = Random.Range(0, _vectors.Count);
+    //            if (_flag)
+    //            {
+    //                inst_obj = Instantiate(_npc, _vectors[randfirst], Quaternion.identity) as GameObject;
 
-        //public bool ChekIntFirstIteration(int Rand)
-        //{
-        //    flag = true;
-        //    for(int i = 0; i < _numberListFirstIteration.Count; i++)
-        //    {
-        //        if ( _numberListFirstIteration[i] == Rand)
-        //        {
-        //            flag = false;
-        //        }
-        //    }
-        //    return flag;
-        //}
+    //                if (_killerFlag)
+    //                {
+    //                    inst_obj.gameObject.tag = "Killer";
+    //                    _killerFlag = false;
+    //                }
+
+    //                _vectors.RemoveAt(randfirst);
+
+    //                spriteRenderers = inst_obj.GetComponentsInChildren<SpriteRenderer>();
+    //            }
+
+    //            _flag = false;
+
+    //            int j = 0;
+    //            _count = 0;
+    //            while (j < 4)
+    //            {
+    //                int rand = Random.Range(1, 9);
+
+    //                if (rand == 1 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 437;
+    //                    j++;
+
+    //                }
+    //                else if (rand == 2 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 566;
+    //                    j++;
+    //                }
+    //                else if (rand == 3 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 110;
+    //                    j++;
+    //                }
+    //                else if (rand == 4 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 444;
+    //                    j++;
+    //                }
+    //                else if (rand == 5 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 228;
+    //                    j++;
+    //                }
+    //                else if (rand == 6 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 789;
+    //                    j++;
+    //                }
+    //                else if (rand == 7 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 653;
+    //                    j++;
+    //                }
+    //                else if (rand == 8 && !(_numberListFirstIteration.Contains(rand)))
+    //                {
+    //                    _numberListFirstIteration.Add(rand);
+    //                    _count += 975;
+    //                    j++;
+    //                }
+    //            }
+
+    //            if (!_numberListSecondIteration.Contains(_count))
+    //            {
+    //                for (int g = 0; g < _numberListFirstIteration.Count; g++)
+    //                {
+    //                    int f = _numberListFirstIteration[g];
+    //                    Destroy(spriteRenderers[f].gameObject);
+    //                }
+
+    //                _numberListSecondIteration.Add(_count);
+    //                i++;
+    //                _flag = true;
+    //            }
+
+    //            _numberListFirstIteration.Clear();
+    //        }
+
+    //    }
+
+
     }
+
+       
+    
 }

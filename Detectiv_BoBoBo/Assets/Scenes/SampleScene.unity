@@ -2012,7 +2012,6 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2137,36 +2136,22 @@ MonoBehaviour:
   - {x: 39.53, y: -18.41, z: 1}
   - {x: 36.44, y: 19.27, z: 1}
   - {x: 10.72, y: 20.92, z: 1}
-  - {x: -15.64, y: 17.74, z: -68.33934}
+  - {x: -15.64, y: 17.74, z: 1}
   - {x: -39.27, y: 16.31, z: 1}
   - {x: -37.11, y: 2.94, z: 1}
   - {x: 36.04, y: 2.94, z: 1}
   - {x: -21.1, y: 6.6, z: 1}
   - {x: 42.2, y: -22.2, z: 1}
   - {x: 39.22, y: 5.62, z: 1}
-  - {x: 24.41, y: 4.93, z: -68.33934}
+  - {x: 24.41, y: 4.93, z: 1}
   - {x: 3.77, y: 21.61, z: 1}
-  - {x: -23.29, y: 19.62, z: -68.33934}
+  - {x: -23.29, y: 19.62, z: 1}
   - {x: -37.27, y: -8.26, z: 1}
-  - {x: -39.27, y: 16.31, z: -68.33934}
+  - {x: -39.27, y: 16.31, z: 1}
   - {x: 6.26, y: -1.86, z: 1}
   - {x: 7.14, y: 2.94, z: 1}
   - {x: -10.71, y: 6.81, z: 1}
   - {x: -8.12, y: 18.49, z: 1}
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f8faed2fdc9ec44a01e2aeaaeaad27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hero: {fileID: 224941307}
-  _sprite: {fileID: 21300000, guid: 50fdfbb7ae871d74e957aecf0324bba0, type: 3}
 --- !u!1001 &523560797
 PrefabInstance:
   m_ObjectHideFlags: 0

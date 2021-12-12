@@ -4,29 +4,25 @@ using UnityEngine;
 
 namespace Detectiv
 {
-    public class KillerSc : MonoBehaviour
+    public class KillerScript : MonoBehaviour
     {
         [SerializeField] private GameObject _hero;
         [SerializeField] private Sprite _sprite;
-        [SerializeField] private SpawnerScript _spawn;
-
 
         private GameObject[] _foundNPC;
         private GameObject _foundKiller;
 
         private bool _find = true;
-        private bool _getClothes = true; 
+        private bool _getClothes = true;
 
         private float _time;
 
         SpriteRenderer[] spriteRenderers;
         SpriteRenderer[] spriteRenderersKiller;
 
-        private List<SpriteRenderer> _rendererList;
-
         void Start()
         {
-            _rendererList = _spawn.CorrectClues;
+
         }
 
         void Update()
@@ -48,7 +44,7 @@ namespace Detectiv
             }
 
 
-            if(_time > 15)
+            if (_time > 15)
             {
                 for (int i = 0; i < _foundNPC.Length; i++)
                 {
@@ -60,9 +56,9 @@ namespace Detectiv
                         spriteRenderers = _foundNPC[i].GetComponentsInChildren<SpriteRenderer>();
                         for (int j = 0; j < spriteRenderers.Length; j++)
                         {
-                            for (int y = 0; y < _rendererList.Count; y++)
+                            for (int y = 0; y < spriteRenderersKiller.Length; y++)
                             {
-                                if (spriteRenderers[j].gameObject.tag == _rendererList[y].tag && _time > 15)
+                                if (spriteRenderers[j].gameObject.tag == spriteRenderersKiller[y].tag && _time > 15)
                                 {
                                     Debug.Log("Hay");
                                     var sp = _foundNPC[i].GetComponent<SpriteRenderer>();
