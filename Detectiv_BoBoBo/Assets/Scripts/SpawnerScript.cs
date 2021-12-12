@@ -6,6 +6,7 @@ namespace Detectiv
 {
     public class SpawnerScript : MonoBehaviour
     {
+        [SerializeField] Canvas can;
         [SerializeField] private GameObject _npc;
         [SerializeField] private List<Vector3> _vectors;
         private GameObject inst_obj;
@@ -19,6 +20,8 @@ namespace Detectiv
         public List<SpriteRenderer> CorrectClues;
 
         private bool[] clues;
+
+        float fg;
 
 
         private int[] randomIntArray() //length 8
@@ -100,7 +103,8 @@ namespace Detectiv
               {
                   Debug.Log(b);
               }*/
-            int[] arrayStrange = randomIntArray();
+            //int[] arrayStrange = randomIntArray();
+            int[] arrayStrange = new int[] { 0, 1, 2, 4, 5, 6, 7, 3  };
 
             while (i < 16)
             {
@@ -145,103 +149,114 @@ namespace Detectiv
 
         private void Start()
         {
+            fg = 1;
+        }
+
+        public void Update()
+        {
+            fg += 1 * Time.deltaTime;
+
+            if(fg > 5)
+            {
+                can.gameObject.SetActive(false);
+            }
             
         }
 
-    //        while (i < 16)
-    //        {
-    //            int randfirst = Random.Range(0, _vectors.Count);
-    //            if (_flag)
-    //            {
-    //                inst_obj = Instantiate(_npc, _vectors[randfirst], Quaternion.identity) as GameObject;
+        //        while (i < 16)
+        //        {
+        //            int randfirst = Random.Range(0, _vectors.Count);
+        //            if (_flag)
+        //            {
+        //                inst_obj = Instantiate(_npc, _vectors[randfirst], Quaternion.identity) as GameObject;
 
-    //                if (_killerFlag)
-    //                {
-    //                    inst_obj.gameObject.tag = "Killer";
-    //                    _killerFlag = false;
-    //                }
+        //                if (_killerFlag)
+        //                {
+        //                    inst_obj.gameObject.tag = "Killer";
+        //                    _killerFlag = false;
+        //                }
 
-    //                _vectors.RemoveAt(randfirst);
+        //                _vectors.RemoveAt(randfirst);
 
-    //                spriteRenderers = inst_obj.GetComponentsInChildren<SpriteRenderer>();
-    //            }
+        //                spriteRenderers = inst_obj.GetComponentsInChildren<SpriteRenderer>();
+        //            }
 
-    //            _flag = false;
+        //            _flag = false;
 
-    //            int j = 0;
-    //            _count = 0;
-    //            while (j < 4)
-    //            {
-    //                int rand = Random.Range(1, 9);
+        //            int j = 0;
+        //            _count = 0;
+        //            while (j < 4)
+        //            {
+        //                int rand = Random.Range(1, 9);
 
-    //                if (rand == 1 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 437;
-    //                    j++;
+        //                if (rand == 1 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 437;
+        //                    j++;
 
-    //                }
-    //                else if (rand == 2 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 566;
-    //                    j++;
-    //                }
-    //                else if (rand == 3 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 110;
-    //                    j++;
-    //                }
-    //                else if (rand == 4 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 444;
-    //                    j++;
-    //                }
-    //                else if (rand == 5 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 228;
-    //                    j++;
-    //                }
-    //                else if (rand == 6 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 789;
-    //                    j++;
-    //                }
-    //                else if (rand == 7 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 653;
-    //                    j++;
-    //                }
-    //                else if (rand == 8 && !(_numberListFirstIteration.Contains(rand)))
-    //                {
-    //                    _numberListFirstIteration.Add(rand);
-    //                    _count += 975;
-    //                    j++;
-    //                }
-    //            }
+        //                }
+        //                else if (rand == 2 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 566;
+        //                    j++;
+        //                }
+        //                else if (rand == 3 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 110;
+        //                    j++;
+        //                }
+        //                else if (rand == 4 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 444;
+        //                    j++;
+        //                }
+        //                else if (rand == 5 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 228;
+        //                    j++;
+        //                }
+        //                else if (rand == 6 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 789;
+        //                    j++;
+        //                }
+        //                else if (rand == 7 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 653;
+        //                    j++;
+        //                }
+        //                else if (rand == 8 && !(_numberListFirstIteration.Contains(rand)))
+        //                {
+        //                    _numberListFirstIteration.Add(rand);
+        //                    _count += 975;
+        //                    j++;
+        //                }
+        //            }
 
-    //            if (!_numberListSecondIteration.Contains(_count))
-    //            {
-    //                for (int g = 0; g < _numberListFirstIteration.Count; g++)
-    //                {
-    //                    int f = _numberListFirstIteration[g];
-    //                    Destroy(spriteRenderers[f].gameObject);
-    //                }
+        //            if (!_numberListSecondIteration.Contains(_count))
+        //            {
+        //                for (int g = 0; g < _numberListFirstIteration.Count; g++)
+        //                {
+        //                    int f = _numberListFirstIteration[g];
+        //                    Destroy(spriteRenderers[f].gameObject);
+        //                }
 
-    //                _numberListSecondIteration.Add(_count);
-    //                i++;
-    //                _flag = true;
-    //            }
+        //                _numberListSecondIteration.Add(_count);
+        //                i++;
+        //                _flag = true;
+        //            }
 
-    //            _numberListFirstIteration.Clear();
-    //        }
+        //            _numberListFirstIteration.Clear();
+        //        }
 
-    //    }
+        //    }
 
 
     }
